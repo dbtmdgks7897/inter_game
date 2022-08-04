@@ -33,6 +33,25 @@ public class GameDaoImpl implements GameDao{
         return conn;
     }
 
+    public void dbClose(){
+        try {
+            //쿼리 닫기
+            if (rs != null) {
+                rs.close();
+            }
+            //데이터 닫기
+            if (pstmt != null) {
+                pstmt.close();
+            }
+            //sql 닫기
+            if (conn != null && !conn.isClosed()) {
+                conn.close();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     @Override
     public void save(GameDto dto) {
 
@@ -57,17 +76,7 @@ public class GameDaoImpl implements GameDao{
         } catch (SQLException e) {
             System.out.println("error: " + e);
         } finally {
-            try {
-                if (pstmt != null) {
-                    pstmt.close();
-                }
-
-                if (conn != null && !conn.isClosed()) {
-                    conn.close();
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+            dbClose();
         }
     }
 
@@ -94,19 +103,7 @@ public class GameDaoImpl implements GameDao{
         } catch (SQLException e) {
             System.out.println("error: " + e);
         } finally {
-            try {
-                if (rs != null) {
-                    rs.close();
-                }
-                if (pstmt != null) {
-                    pstmt.close();
-                }
-                if (conn != null && !conn.isClosed()) {
-                    conn.close();
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+            dbClose();
         }
         return udto;
     }
@@ -135,17 +132,7 @@ public class GameDaoImpl implements GameDao{
         } catch (SQLException e) {
             System.out.println("error: " + e);
         } finally {
-            try {
-                if (pstmt != null) {
-                    pstmt.close();
-                }
-
-                if (conn != null && !conn.isClosed()) {
-                    conn.close();
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+            dbClose();
         }
     }
 
@@ -167,17 +154,7 @@ public class GameDaoImpl implements GameDao{
         } catch (SQLException e) {
             System.out.println("error: " + e);
         } finally {
-            try {
-                if (pstmt != null) {
-                    pstmt.close();
-                }
-
-                if (conn != null && !conn.isClosed()) {
-                    conn.close();
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+            dbClose();
         }
     }
 }
